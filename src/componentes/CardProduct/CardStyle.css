@@ -1,0 +1,15 @@
+.card-text {
+    margin: 1px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: black;
+    text-align: center;
+}
+
+.card-descripcion {
+    font-weight: lighter;
+    font-size: 0.9rem;
+}
+

@@ -1,28 +1,36 @@
 import React from "react";
 import CounterContainer from '../../containers/CounterContainer';
+import Loader from '../../componentes/Loader/Loader';
 import './CardStyle.css';
 
-export default function CardProduct({products}) {
+export default function CardProduct({books}) {
   return (
-    <div className="d-flex justify-content-center ">
+    <div className="d-flex flex-wrap">
      
-      {products.length === 0 ? (
-        <p>Loading...</p>
+      {books.length === 0 ? (
+        <div style={{margin:'auto'}} >
+        <Loader/>
+        </div>
       ) : (
-        products.map( p =>
-            <div key={p.id} className="card m-3 bg-light" style={{width: '18rem'}}>
-                <img className="card-img-top" style={{backgroundColor:'grey', height:'200px'}}/>
+        books.map( book =>
+        
+            <div key={book.id} className="card m-3 bg-light" style={{width: '18rem'}}>
+                <img className="card-img-top" style={{backgroundColor:'grey', height:'300px', width:'auto', backgroundImage:`url(${book.image})`, backgroundPosition:'center'}}/>
                 <div className="card-text">
-                    <h1 className="card-title">{p.name}</h1>
+                    <h1 className="card-title">{book.title}</h1>
                 </div>
+                {/* <div className="card-text">
+                    <p className="card-descripcion">{book.description}</p> 
+                </div> */}
                 <div className="card-text">
-                    <p className="card-descripcion">{p.descripcion}</p>
+                    <p className="card-descripcion">{book.author}</p> 
                 </div>
                     <CounterContainer min='0' max='10'/>
                 <div className="card-footer bg-transparent">
-                    <button className="btn btn-success" >Agregar al carrito</button>
+                    <button className="btn btn-danger" >Comprar</button>
                 </div>
-            </div> )
+            </div>
+            )
       )}
       
     </div>

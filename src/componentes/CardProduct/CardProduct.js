@@ -5,7 +5,7 @@ import './CardStyle.css';
 
 export default function CardProduct({books}) {
   return (
-    <div className="d-flex flex-wrap">
+    <div className="container justify-content-center  d-flex flex-wrap ">
      
       {books.length === 0 ? (
         <div style={{margin:'auto'}} >
@@ -27,7 +27,7 @@ export default function CardProduct({books}) {
                 </div>
                     <CounterContainer min='0' max='10'/>
                 <div className="card-footer bg-transparent">
-                    <button className="btn btn-danger" >Comprar</button>
+                    <button className="btn btn-danger" >Agregar al carrito</button>
                 </div>
             </div>
             )

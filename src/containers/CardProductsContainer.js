@@ -56,7 +56,7 @@ export default function CardProductContainer() {
  
        
    return (
-     <div>
+     <div className="d-flex flex-wrap justify-content-center " >
        <CardProduct books={books} />
      </div>
      );

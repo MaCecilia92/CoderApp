@@ -4,18 +4,18 @@ import CounterContainer from '../../containers/CounterContainer';
 import BuyButton from '../BuyButton/BuyButton'
 
 
-export default function CardDetail({libros}) {
+export default function CardDetail({libros, isLoading}) {
   
     return (
         <div className="container">
      
-      {libros.length === 0 ? (
+      {isLoading && libros.length === 0 ? (
         <div style={{margin:'auto'}} >
         <Loader/>
         </div>
       ) : (
         libros.map( libro => <div key={libro.id}>
-            <div className="row m-4">
+            <div className="row m-5">
                 <div className="col-md-4">
 
                 <img src={libro.image} className="img-fluid" alt={libro.title} style={{backgroundColor:'grey', height:'auto', width:'500px', backgroundImage:`url(${libro.image})`, backgroundPosition:'center'}}/>

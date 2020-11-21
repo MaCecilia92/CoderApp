@@ -3,6 +3,8 @@ import CardDetail from '../componentes/CardsDetail/CardDetail';
 
 export default function CardDetailContainer() {
 
+    const [isLoading, setLoading] = useState(true)
+
     const [libros, setLibros]= useState([])
 
     useEffect(()=>{
@@ -17,6 +19,7 @@ export default function CardDetailContainer() {
             .then(results => {
                     console.log(results);
                     setLibros([results[Math.floor((Math.random() * results.length) +1)]]);
+                    setLoading(false);
       });
         }, 4000)
 
@@ -24,7 +27,7 @@ export default function CardDetailContainer() {
 
     return (
         <div>
-            <CardDetail libros={libros}/>
+            <CardDetail libros={libros} isLoading={isLoading}/>
         </div>
     )
 }

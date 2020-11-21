@@ -9,7 +9,7 @@ export default function CardDetail({libros, isLoading}) {
     return (
         <div className="container">
      
-      {isLoading && libros.length === 0 ? (
+      {isLoading ? (
         <div style={{margin:'auto'}} >
         <Loader/>
         </div>

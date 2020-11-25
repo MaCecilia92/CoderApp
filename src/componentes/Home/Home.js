@@ -11,7 +11,6 @@ export default function Home({greeting}) {
             <div className="m-5">
             <h1>{greeting}</h1>
             </div>
-            <CardDetailContainer/>
             <CardProductsContainer/>
         </div>
     )

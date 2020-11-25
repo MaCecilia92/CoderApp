@@ -1,6 +1,7 @@
 import React from "react";
 import CounterContainer from '../../containers/CounterContainer';
 import Loader from '../../componentes/Loader/Loader';
+import { Link } from 'react-router-dom';
 import './CardStyle.css';
 
 export default function CardProduct({books}) {
@@ -15,7 +16,9 @@ export default function CardProduct({books}) {
         books.map( book =>
         
             <div key={book.id} className="card m-3 bg-light" style={{width: '18rem'}}>
+              <Link to={`/item/${book.id}`}>
                 <img className="card-img-top" style={{backgroundColor:'grey', height:'300px', width:'auto', backgroundImage:`url(${book.image})`, backgroundPosition:'center'}}/>
+                </Link>
                 <div className="card-text">
                     <h1 className="card-title">{book.title}</h1>
                 </div>

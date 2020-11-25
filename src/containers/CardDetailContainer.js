@@ -1,16 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import CardDetail from '../componentes/CardsDetail/CardDetail';
+import { useParams } from 'react-router-dom';
 
-export default function CardDetailContainer() {
+export default function CardDetailContainer() {  
+
 
     const [isLoading, setLoading] = useState(true)
 
     const [libros, setLibros]= useState([])
 
+    const { id } = useParams();
+
+  
+
     useEffect(()=>{
         const getBooks = fetch('https://private-5709b2-booklists.apiary-mock.com/booklists');
 
-        setTimeout(()=>{
+        
             getBooks
             .then(res => {
                     const results = res.json();
@@ -18,12 +24,17 @@ export default function CardDetailContainer() {
                 })
             .then(results => {
                     console.log(results);
-                    setLibros([results[Math.floor((Math.random() * results.length) +1)]]);
+                    setLibros([results= results.find(e => e.id === id)]);
                     setLoading(false);
       });
-        }, 4000)
 
     },[]);
+
+    useEffect(()=>{
+        console.log("id", id)
+    },[id])
+
+    console.log(libros)
 
     return (
         <div>

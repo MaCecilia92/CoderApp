@@ -5,18 +5,17 @@ import { useParams } from 'react-router-dom';
 export default function CardDetailContainer() {  
 
 
+    const { id } = useParams();
+
     const [isLoading, setLoading] = useState(true)
 
     const [libros, setLibros]= useState([])
 
-    const { id } = useParams();
 
-  
 
     useEffect(()=>{
-        const getBooks = fetch('https://private-5709b2-booklists.apiary-mock.com/booklists');
-
         
+        const getBooks = fetch('https://private-5709b2-booklists.apiary-mock.com/booklists');
             getBooks
             .then(res => {
                     const results = res.json();
@@ -24,15 +23,13 @@ export default function CardDetailContainer() {
                 })
             .then(results => {
                     console.log(results);
-                    setLibros([results= results.find(e => e.id === id)]);
+                    console.log("id--->", id)
+                    //setLibros([results[Math.floor(Math.random() * results.length + 1)]]); Me trae un elemento aleatorio del arreglo 
+                    setLibros([results.find(e => e.id == id)]);
                     setLoading(false);
       });
-
-    },[]);
-
-    useEffect(()=>{
-        console.log("id", id)
-    },[id])
+      
+    },[id]);
 
     console.log(libros)
 

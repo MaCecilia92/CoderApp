@@ -16,9 +16,10 @@ export default function CardProduct({books}) {
         books.map( book =>
         
             <div key={book.id} className="card m-3 bg-light" style={{width: '18rem'}}>
-              <Link to={`/item/${book.id}`}>
+              
                 <img className="card-img-top" style={{backgroundColor:'grey', height:'300px', width:'auto', backgroundImage:`url(${book.image})`, backgroundPosition:'center'}}/>
-                </Link>
+          
+  
                 <div className="card-text">
                     <h1 className="card-title">{book.title}</h1>
                 </div>
@@ -30,8 +31,11 @@ export default function CardProduct({books}) {
                 </div>
                     <CounterContainer min='0' max='10'/>
                 <div className="card-footer bg-transparent">
-                    <button className="btn btn-danger" >Agregar al carrito</button>
+                <Link to={`/item/${book.id}`}>
+                    <button className="btn btn-danger" >Detalles</button>
+                    </Link> 
                 </div>
+                
             </div>
             )
       )}

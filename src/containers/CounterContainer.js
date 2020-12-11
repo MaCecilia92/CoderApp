@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import ItemCount from '../componentes/ItemCount/ItemCount';
 
-export default function CounterContainer({min,max}) {
+export default function CounterContainer({min,max, counter,setCounter}) {
 
-    const [counter, setCounter]= useState(0);
+    // const [counter, setCounter]= useState(0);
 
     const onAdd = (sign)=> {
         if ( (sign === '+') && (counter < max) ) setCounter(counter+1)
@@ -12,7 +12,7 @@ export default function CounterContainer({min,max}) {
 
     return (
         <div>
-         <ItemCount counter={counter} onAdd={onAdd}/>
+         <ItemCount counter={counter}  onAdd={onAdd}/>
         </div>
     )
 }

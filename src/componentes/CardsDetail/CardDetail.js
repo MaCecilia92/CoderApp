@@ -4,7 +4,7 @@ import CounterContainer from '../../containers/CounterContainer';
 import BuyButton from '../BuyButton/BuyButton'
 
 
-export default function CardDetail({libros, isLoading}) {
+export default function CardDetail({libros, isLoading, counter, setCounter, buyButton}) {
   
     return (
         <div className="container">
@@ -26,8 +26,8 @@ export default function CardDetail({libros, isLoading}) {
                     <hr/>
                     <p className="card-descripcion text-left">{libro.description}</p>
                     <div className="d-flex justify-content-center">
-                    <CounterContainer min='0' max='10'/>
-                    <BuyButton/>
+                    <CounterContainer min='0' max='10' counter={counter} setCounter={setCounter}/>
+                    <BuyButton counter={counter} buyButton={buyButton}/>
                     </div>
                 </div>
             </div>

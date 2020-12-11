@@ -1,8 +1,4 @@
 import React from 'react';
-import CardProductsContainer from '../../containers/CardProductsContainer';
-import CardDetailContainer from '../../containers/CardDetailContainer'
-
-
 
 export default function Home({greeting}) {
 

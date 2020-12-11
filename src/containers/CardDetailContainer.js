@@ -11,6 +11,10 @@ export default function CardDetailContainer() {
 
     const [libros, setLibros]= useState([])
 
+    const [counter, setCounter]= useState(0)
+
+    const [cartItems, setCartItems] = useState([])
+
 
 
     useEffect(()=>{
@@ -29,13 +33,18 @@ export default function CardDetailContainer() {
                     setLoading(false);
       });
       
-    },[id]);
+    },[]);
 
-    console.log(libros)
+    const buyButton = () => {
+        setCartItems (currentCart =>
+            [...currentCart, ...libros])
+        
+    }
+    console.log(cartItems)
 
     return (
         <div>
-            <CardDetail libros={libros} isLoading={isLoading}/>
+            <CardDetail libros={libros} isLoading={isLoading} counter={counter} setCounter={setCounter} buyButton={buyButton}/>
         </div>
     )
 }

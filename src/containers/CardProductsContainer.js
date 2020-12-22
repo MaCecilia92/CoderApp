@@ -1,18 +1,21 @@
-import React, {useState, useEffect} from 'react'; 
+import React  from 'react'; 
 import CardProduct from '../componentes/CardProduct/CardProduct';
+import { useCartContext } from "../context/CartContext";
 
 
 
 export default function CardProductContainer() {
+
+  const { libros} = useCartContext();
     
 
-    const [books, setBooks]= useState([]);
-    useEffect (()=>{
-        fetch('https://private-5709b2-booklists.apiary-mock.com/booklists')
-        .then((response) => response.json())
-        .then((json) => setBooks(json))
-        .catch((error) => console.error(error))
-    }, []);
+    // const [books, setBooks]= useState([]);
+    // useEffect (()=>{
+    //     fetch('https://private-5709b2-booklists.apiary-mock.com/booklists')
+    //     .then((response) => response.json())
+    //     .then((json) => setBooks(json))
+    //     .catch((error) => console.error(error))
+    // }, []);
  
     // useEffect(()=>{
     //    getProducts
@@ -57,7 +60,7 @@ export default function CardProductContainer() {
        
    return (
      <div className="d-flex flex-wrap justify-content-center " >
-       <CardProduct books={books} />
+       <CardProduct libros={libros} />
      </div>
      );
  }

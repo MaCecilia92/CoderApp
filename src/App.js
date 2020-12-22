@@ -8,11 +8,14 @@ import CardProductsContainer from './containers/CardProductsContainer';
 
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
+import { CartProvider } from "./context/CartContext";
+
 
 function App() {
 
   return (
     <div className="App">
+      <CartProvider>
       <BrowserRouter>
       <NavBar/>
       <Switch>
@@ -21,8 +24,8 @@ function App() {
       <Route path='/Cart' render={()=><CartContainer/>}/>
       <Route path='/item/:id' render={()=><CardDetailContainer/>}/>
       </Switch>
-    
       </BrowserRouter>
+      </CartProvider>
     </div>
   );
 }

@@ -4,16 +4,16 @@ import Loader from '../../componentes/Loader/Loader';
 import { Link } from 'react-router-dom';
 import './CardStyle.css';
 
-export default function CardProduct({books}) {
+export default function CardProduct({libros}) {
   return (
     <div className="container justify-content-center  d-flex flex-wrap ">
      
-      {books.length === 0 ? (
+      {libros.length === 0 ? (
         <div style={{margin:'auto'}} >
         <Loader/>
         </div>
       ) : (
-        books.map( book =>
+        libros.map( book =>
         
             <div key={book.id} className="card m-3 bg-light" style={{width: '18rem'}}>
               
@@ -29,7 +29,6 @@ export default function CardProduct({books}) {
                 <div className="card-text">
                     <p className="card-descripcion">{book.author}</p> 
                 </div>
-                    <CounterContainer min='0' max='10'/>
                 <div className="card-footer bg-transparent">
                 <Link to={`/item/${book.id}`}>
                     <button className="btn btn-danger" >Detalles</button>

@@ -1,50 +1,33 @@
 import React, {useEffect, useState} from 'react';
 import CardDetail from '../componentes/CardsDetail/CardDetail';
 import { useParams } from 'react-router-dom';
+import { useCartContext } from "../context/CartContext";
 
-export default function CardDetailContainer() {  
+export default function CardDetailContainer() {
 
 
     const { id } = useParams();
 
-    const [isLoading, setLoading] = useState(true)
+    const [bookFind, setBookFind]= useState([])
 
-    const [libros, setLibros]= useState([])
+    const { add, libros, isLoading, setLoading } = useCartContext();
 
-    const [counter, setCounter]= useState(0)
-
-    const [cartItems, setCartItems] = useState([])
+    console.log("id--->", id)
 
 
 
     useEffect(()=>{
-        
-        const getBooks = fetch('https://private-5709b2-booklists.apiary-mock.com/booklists');
-            getBooks
-            .then(res => {
-                    const results = res.json();
-                    return results;
-                })
-            .then(results => {
-                    console.log(results);
-                    console.log("id--->", id)
-                    //setLibros([results[Math.floor(Math.random() * results.length + 1)]]); Me trae un elemento aleatorio del arreglo 
-                    setLibros([results.find(e => e.id == id)]);
-                    setLoading(false);
-      });
-      
+       
+            setBookFind(libros.find(book => book.id==id));        
+            setLoading(false); 
+
     },[]);
 
-    const buyButton = () => {
-        setCartItems (currentCart =>
-            [...currentCart, ...libros])
-        
-    }
-    console.log(cartItems)
+
 
     return (
         <div>
-            <CardDetail libros={libros} isLoading={isLoading} counter={counter} setCounter={setCounter} buyButton={buyButton}/>
+            <CardDetail bookFind={bookFind} isLoading={isLoading} add={add}/>
         </div>
     )
 }

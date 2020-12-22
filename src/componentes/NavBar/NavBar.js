@@ -1,9 +1,14 @@
 import React from 'react';
 import CartIcon from './CartIcon/CartIcon';
 import { Link} from 'react-router-dom';
+import { useCartContext } from "../../context/CartContext";
+
 
 
 const NavBar = ()=>{
+
+    const { count, add } = useCartContext();
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link className="navbar-brand" to="/">NavBar</Link>
@@ -27,7 +32,7 @@ const NavBar = ()=>{
                     </Link>
                     </li>
                 </ul>
-                <CartIcon/>
+                <CartIcon count={count}/>
             </div>
         </nav>
         

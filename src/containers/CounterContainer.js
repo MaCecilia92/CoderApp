@@ -3,7 +3,7 @@ import ItemCount from '../componentes/ItemCount/ItemCount';
 import BuyButton from '../componentes/BuyButton/BuyButton';
 
 
-export default function CounterContainer({min,max, add, bookFind}) {
+export default function CounterContainer({min,max, add, books}) {
     
     const [counter, setCounter]= useState(0);
 
@@ -17,7 +17,7 @@ export default function CounterContainer({min,max, add, bookFind}) {
     return (
         <div className="d-flex justify-content-center">
          <ItemCount counter={counter}  onAdd={onAdd}/>
-         <BuyButton counter={counter}  add={add} bookFind={bookFind}/>
+         <BuyButton counter={counter}  add={add} books={books}/>
         </div>
     )
 }

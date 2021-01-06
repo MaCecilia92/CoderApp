@@ -3,31 +3,67 @@ import CardDetail from '../componentes/CardsDetail/CardDetail';
 import { useParams } from 'react-router-dom';
 import { useCartContext } from "../context/CartContext";
 
+
+import 'firebase/firestore';
+import { getFirestore } from '../firebase/index'
+
+
 export default function CardDetailContainer() {
 
 
     const { id } = useParams();
 
-    const [bookFind, setBookFind]= useState([])
-
     const { add, libros, isLoading, setLoading } = useCartContext();
 
-    console.log("id--->", id)
+    const [books, setBooks] = useState({})
+
+    let bookObject
+
+    useEffect(() => {
+        const db = getFirestore();
+        const booksCollection = db.collection('products_books')
+        const bookFind = booksCollection.doc(id);
+        const categories = db.collection('categories');
+        
 
 
+        bookFind.get().then(doc =>{
+            if(!doc.exists){
+                console.log('book not found')
+                return 
+            }
+            console.log('item found');
 
-    useEffect(()=>{
-       
-            setBookFind(libros.find(book => book.id==id));        
-            setLoading(false); 
-
-    },[]);
+            const categoryKeys = []
 
 
+            doc.data().categoryId.map(ids => {
+                categories.doc(ids).get().then(category => {
+                    categoryKeys.push(category.data().key)
+                })
+            })
 
+
+            bookObject = { 
+                id: doc.id,
+                categories: categoryKeys,
+                ...doc.data()
+            }
+            
+
+        }).catch(error=>{
+            console.log('error searching book', error)
+        }).finally(()=>{
+            setTimeout(()=>{setBooks(bookObject);}, 1000)
+            setLoading(false)
+        })
+
+
+    }, [])
+    
     return (
         <div>
-            <CardDetail bookFind={bookFind} isLoading={isLoading} add={add}/>
+            <CardDetail books={books}  add={add}/>
         </div>
     )
 }

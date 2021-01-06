@@ -1,66 +1,46 @@
-import React  from 'react'; 
+import React, { useEffect, useState }  from 'react'; 
 import CardProduct from '../componentes/CardProduct/CardProduct';
 import { useCartContext } from "../context/CartContext";
+
+import { getFirestore } from '../firebase/index'
 
 
 
 export default function CardProductContainer() {
 
-  const { libros} = useCartContext();
-    
+  const { libros, setLoading} = useCartContext();
 
-    // const [books, setBooks]= useState([]);
-    // useEffect (()=>{
-    //     fetch('https://private-5709b2-booklists.apiary-mock.com/booklists')
-    //     .then((response) => response.json())
-    //     .then((json) => setBooks(json))
-    //     .catch((error) => console.error(error))
-    // }, []);
- 
-    // useEffect(()=>{
-    //    getProducts
-    //     .then((response) => {
-    //      console.log(response);
-    //      setProducts(response)
-    //    });
-    // }, [])
- 
-    // const getProducts = new Promise ((res,rej)=>{
-    //    const Productos = [
-    //    {
-    //      "id":"1",
-    //      "name" : "Remera Blanca",
-    //      "descripcion" : "100% algodón"
-    //    },
-    //    {
-    //      "id" : "2",
-    //      "name" : "Remera Azul",
-    //      "descripcion" : "50% algodón"
-    //    },
-    //    {
-    //     "id" : "3",
-    //     "name" : "Remera Negra",
-    //     "descripcion" : "50% algodón + 50% poliester"
-    //   },
-    //   {
-    //     "id" : "4",
-    //     "name" : "Remera Roja",
-    //     "descripcion" : "100% algodón"
-    //   }
-    //  ];
- 
-    //  setTimeout(()=>{
-    //    res(Productos)
-    //    console.log('se ejecutó');
-    //    rej("error")
-    //  }, 3000)
- 
-    //  })
- 
-       
+  const [books, setBooks] = useState([])
+
+  useEffect(()=>{
+    setLoading(true);
+    const db = getFirestore();
+    const itemcollection = db.collection('products_books');
+    itemcollection.get().then((querySnapshot)=>{
+      if (querySnapshot.size === 0){
+        console.log('No tiene resultados')
+      }
+      setBooks(querySnapshot.docs.map(doc =>  {
+        const bookid = {
+        ...doc.data(),
+        id: doc.id
+        }
+        return bookid
+      }
+      
+      ));
+    }).catch((error)=>{
+      console.log('error searchig books', error);
+    }).finally(()=>{
+      setLoading(false)
+    });
+  },[])
+
+  console.log('books db', books)
+           
    return (
      <div className="d-flex flex-wrap justify-content-center " >
-       <CardProduct libros={libros} />
+       <CardProduct books={books} />
      </div>
      );
  }

@@ -4,7 +4,10 @@ import { Link} from 'react-router-dom';
 
 export default function CartContainer() {
 
-    const { cartItems, borrar } = useCartContext();
+    const { cartItems, borrar, buyPrice } = useCartContext();
+
+
+
     return (
         <div>
     
@@ -16,7 +19,7 @@ export default function CartContainer() {
         cartItems.map( libro => <div key={libro.id} style={{marginTop:'30px'}}>
             <div className="row m-8 d-flex justify-content-center">
                 <div className="col-md-1">
-                <img src={libro.image} className="img-fluid" alt={libro.title} style={{backgroundColor:'grey', height:'150px', width:'auto', backgroundImage:`url(${libro.image})`, backgroundPosition:'center'}}/>
+                <img src={libro.imageUrl} className="img-fluid" alt={libro.title} style={{backgroundColor:'grey', height:'150px', width:'auto', backgroundImage:`url(${libro.imageUrl})`, backgroundPosition:'center'}}/>
                 <br></br>
                 </div>
 
@@ -25,11 +28,18 @@ export default function CartContainer() {
                     <div className=" d-flex justify-content-between">
                     <p className="card-descripcion text-left">{libro.author}</p> 
                     <p className="card-descripcion text-left text-primary">Agregaste <span className="font-weight-bold">{libro.booksAmount}</span> unidades al carrito</p>
+                    <h2>{libro.totalPrice}</h2>
                     </div>
                     <hr style={{marginTop:0, marginBottom:'10px'}}/>
                     <div className=" d-flex justify-content-end">
                     <button className="btn btn-danger" onClick={()=>{borrar(libro.id)}} >Borrar</button>
                     </div>
+                    <hr/>
+                    <div className="d-flex">
+                    <h5>Precio total de la compra</h5><span>{buyPrice}</span>
+                    </div>
+                    <button className="btn btn-primary">Comprar</button>
+                    
                 </div>
             </div>
         </div>)

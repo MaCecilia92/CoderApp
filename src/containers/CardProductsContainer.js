@@ -8,7 +8,7 @@ import { getFirestore } from '../firebase/index'
 
 export default function CardProductContainer() {
 
-  const { libros, setLoading} = useCartContext();
+  const { setLoading} = useCartContext();
 
   const [books, setBooks] = useState([])
 
@@ -34,10 +34,7 @@ export default function CardProductContainer() {
     }).finally(()=>{
       setLoading(false)
     });
-  },[])
-
-  console.log('books db', books)
-           
+  },[])           
    return (
      <div className="d-flex flex-wrap justify-content-center " >
        <CardProduct books={books} />

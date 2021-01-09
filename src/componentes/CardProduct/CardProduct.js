@@ -1,5 +1,4 @@
 import React from "react";
-import CounterContainer from '../../containers/CounterContainer';
 import Loader from '../../componentes/Loader/Loader';
 import { Link } from 'react-router-dom';
 import './CardStyle.css';
